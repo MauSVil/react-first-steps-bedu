@@ -4,16 +4,16 @@ import Message from './Message';
 
 class Header extends React.Component {
   render() {
+    console.log("RENDER")
     return (
       <header className="App-header">
         <Logo />
         <Message
-          cssClass="type1"
-          title="Google"
+          color="rgb(234, 222, 214)"
           site="https://google.com/"
         />
         <Message
-          cssClass="type2"
+          color="#eeeeee"
           title="Facebook"
           site="https://facebook.com/"
         />

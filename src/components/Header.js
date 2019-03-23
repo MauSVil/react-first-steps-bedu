@@ -1,22 +1,34 @@
 import React from 'react';
-import { Logo } from './Logo';
+//import { Logo } from './Logo';
 import Message from './Message';
 
 class Header extends React.Component {
+  state = {
+    info: []
+  }
+
+  async componentDidMount() {
+    const dataRaw = await fetch('https://swapi.co/api/people/')
+    const data = await dataRaw.json()
+
+    this.setState({info: data.results})
+  }
+
   render() {
-    console.log("RENDER")
+    const characters = this.state.info.map(function(character, index){
+      return (
+        <Message
+          key={`${character.name}-${index}`}
+          color={character.eye_color}
+          site={character.url}
+          title={character.name}
+        />
+      );
+    });
+
     return (
       <header className="App-header">
-        <Logo />
-        <Message
-          color="rgb(234, 222, 214)"
-          site="https://google.com/"
-        />
-        <Message
-          color="#eeeeee"
-          title="Facebook"
-          site="https://facebook.com/"
-        />
+      { characters }
       </header>
     );
   }

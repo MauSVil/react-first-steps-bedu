@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import Body from './components/Body';
+import Example from './components/Example'
+import { Router } from '@reach/router'
 
 const CharactersContext = React.createContext()
 
@@ -30,7 +32,10 @@ class App extends React.Component {
     return (
       <CharactersContext.Provider value={context}>
         <div className="App">
-          <Body/>
+          <Router>
+            <Body path="/" />
+            <Example path="hola" />
+          </Router>
         </div>
       </CharactersContext.Provider>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import Message from './Message';
-import { CharactersContext } from '../App'
+import { Context } from '../App'
 
 const RenderCharacters = function(context) {
   return (
@@ -23,9 +23,9 @@ const RenderCharacters = function(context) {
 
 const Header = function(props) {
   return (
-    <CharactersContext.Consumer>
+    <Context.Consumer>
       { RenderCharacters }
-    </CharactersContext.Consumer>
+    </Context.Consumer>
   );
 }
 

@@ -1,9 +1,11 @@
 import React from 'react'
+import PostNav from './PostNav'
 
-function Posts(props) {
-  return (
-    <p>Posts</p>
-  )
-}
+const Posts = props => (
+  <>
+    <PostNav />
+    {props.children}
+  </>
+)
 
 export default Posts

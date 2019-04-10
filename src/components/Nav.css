@@ -7,3 +7,9 @@
 .App-link > a {
   color: #61dafb;
 }
+
+.App-link.second {
+  border-top: 1px solid #ccc;
+  margin-top: 40px;
+  padding-top: 10px;
+}

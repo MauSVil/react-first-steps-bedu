@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import Body from './components/Body';
 import Posts from './components/Posts'
+import PostCreate from './components/PostCreate'
+import PostContainer from './components/PostContainer'
 import Nav from './components/Nav'
 import { Router } from '@reach/router'
 
@@ -9,7 +11,8 @@ const Context = React.createContext()
 
 class App extends React.Component {
   state = {
-    characters: []
+    characters: [],
+    posts: []
   }
 
   componentDidMount() {
@@ -31,8 +34,28 @@ class App extends React.Component {
     this.setState({[type]: data})
   }
 
+  putDataFromLocalAPI = async (type, body) => {
+    try {
+      return await fetch(
+      `http://localhost:4000/${type}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(body)
+        }
+      )
+    } catch (e) {
+      return e
+    }
+  }
+
   render() {
-    const context = { ...this.state }
+    const context = {
+      ...this.state,
+      putDataFromLocalAPI: this.putDataFromLocalAPI
+    }
 
     return (
       <Context.Provider value={context}>
@@ -40,7 +63,10 @@ class App extends React.Component {
             <Nav />
             <Router>
               <Body path="/" />
-              <Posts path="posts" />
+              <Posts path="posts">
+                <PostContainer path="/" />
+                <PostCreate path="create" />
+              </Posts>
             </Router>
           </div>
       </Context.Provider>

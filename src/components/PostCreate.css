@@ -1,0 +1,8 @@
+.App-form > label {
+  display: block;
+}
+
+.App-form input {
+  margin-left: 8px;
+  vertical-align: middle;
+}

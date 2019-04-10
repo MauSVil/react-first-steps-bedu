@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 import Body from './components/Body';
-import Example from './components/Example'
+import Posts from './components/Posts'
+import Nav from './components/Nav'
 import { Router } from '@reach/router'
 
 const CharactersContext = React.createContext()
@@ -11,11 +12,23 @@ class App extends React.Component {
     characters: []
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.getDataFromSWAPI()
+    this.getDataFromLocalAPI('posts')
+  }
+
+  async getDataFromSWAPI() {
     const dataRaw = await fetch('https://swapi.co/api/people/')
     const data = await dataRaw.json()
 
     this.setState({characters: data.results})
+  }
+
+  async getDataFromLocalAPI(type) {
+    const dataRaw = await fetch(`http://localhost:4000/${type}`)
+    const data = await dataRaw.json()
+
+    this.setState({[type]: data})
   }
 
   consoleLogState = () => {
@@ -32,9 +45,10 @@ class App extends React.Component {
     return (
       <CharactersContext.Provider value={context}>
         <div className="App">
+          <Nav />
           <Router>
             <Body path="/" />
-            <Example path="hola" />
+            <Posts path="posts" />
           </Router>
         </div>
       </CharactersContext.Provider>

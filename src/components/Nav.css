@@ -1,0 +1,9 @@
+.App-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.App-link > a {
+  color: #61dafb;
+}
